@@ -1,5 +1,6 @@
 package com.lautaro.spring.boot.jpa.springboot_jpa.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,6 +15,8 @@ public class Person {
     private Long id;
     private String name;
     private String lastName;
+
+    @Column(name = "programming_language")
     private String programmingLanguage;
 
 
@@ -52,5 +55,13 @@ public class Person {
         this.programmingLanguage = programmingLanguage;
     }
 
-    
+    @Override
+    public String toString() {
+        return "[" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", programmingLanguage='" + programmingLanguage + '\'' +
+                ']';
+    }
 }
