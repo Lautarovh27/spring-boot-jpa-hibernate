@@ -1,6 +1,7 @@
 package com.lautaro.spring.boot.jpa.springboot_jpa;
 
-import java.util.List;
+import java.util.*;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -21,6 +22,22 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		findOne();
+		
+	}
+
+	public void findOne(){
+		
+		Person person = null;
+		Optional<Person> optionalPerson = personRepository.findById(8L);
+		if(optionalPerson.isPresent()){
+			person = optionalPerson.get();
+		}
+		System.out.println(person);
+
+	}
+	public void List(){
+
 		//List<Person> persons = (List<Person>) personRepository.findAll();
 		
 		List<Person> persons = personRepository.findByProgrammingLanguageAndName("Java", "Andres");
@@ -29,6 +46,5 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		List<Object[]> personsData = personRepository.obtenerPersonData("Pepe");
 		personsData.stream().forEach(data -> System.out.println("Name: " + data[0] + ", Programming Language: " + data[1]));
 
-		
 	}
 }
