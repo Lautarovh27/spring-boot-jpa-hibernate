@@ -10,6 +10,7 @@ import jakarta.persistence.Table;
     @Entity
     @Table(name = "persons")
     public class Person {
+
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
@@ -18,9 +19,6 @@ import jakarta.persistence.Table;
 
         @Column(name = "programming_language")
         private String programmingLanguage;
-
-
-
 
         public Person() {
         }
