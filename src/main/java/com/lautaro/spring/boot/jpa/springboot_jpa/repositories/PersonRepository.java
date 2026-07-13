@@ -1,6 +1,7 @@
 package com.lautaro.spring.boot.jpa.springboot_jpa.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -8,6 +9,17 @@ import org.springframework.data.repository.CrudRepository;
 import com.lautaro.spring.boot.jpa.springboot_jpa.entities.Person;
 
 public interface PersonRepository extends CrudRepository<Person, Long> {
+
+    @Query("SELECT p FROM Person p WHERE p.id = ?1")
+    Optional<Person> findOne(Long id);
+
+    
+    @Query("SELECT p FROM Person p WHERE p.name = ?1")
+    Optional<Person> findOneByName(String name);
+
+    
+    @Query("SELECT p FROM Person p WHERE p.name like %?1%")
+    Optional<Person> findOneLikeName(String name);
 
     List<Person> findByProgrammingLanguage(String programmingLanguage);
 
@@ -26,6 +38,8 @@ public interface PersonRepository extends CrudRepository<Person, Long> {
     
     @Query("SELECT p.name, p.programmingLanguage from Person p WHERE p.programmingLanguage = ?1")
     List<Object[]> obtenerPersonDataByProgrammingLanguage(String programmingLanguage);
+
+    Optional<Person> findByNameContaining(String name);
 }
 
 

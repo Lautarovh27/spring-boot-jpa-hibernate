@@ -27,8 +27,13 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 	}
 
 	public void findOne(){
-		
-		personRepository.findById(1L).ifPresent(System.out::println);
+		//Person person = null;
+		//Optional<Person> optionalPerson = personRepository.findById(1L);
+		//if(!optionalPerson.isEmpty()){
+		//	person = optionalPerson.get();
+		//}
+		//System.out.println(person);
+		personRepository.findByNameContaining("ria").ifPresent(System.out::println);
 
 	}
 	public void List(){
@@ -42,4 +47,5 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		personsData.stream().forEach(data -> System.out.println("Name: " + data[0] + ", Programming Language: " + data[1]));
 
 	}
+	
 }
