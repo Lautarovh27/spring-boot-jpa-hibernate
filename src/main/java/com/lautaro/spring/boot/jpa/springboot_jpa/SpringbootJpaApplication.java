@@ -24,12 +24,24 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		//delete();
+		delete2();
 		//update();
-		create();
+		//create();
 		//findOne();
 		//List();
 	}
-
+@Transactional
+	public void delete2() {
+		personRepository.findAll().forEach(System.out::println);
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Ingrese el id de la persona a eliminar: ");
+		Long id = scanner.nextLong();
+		Optional<Person> optionalPerson = personRepository.findById(id);
+		optionalPerson.ifPresentOrElse(person -> personRepository.delete(person),
+		 () -> System.out.println("Persona no encontrada con id: " + id));
+		personRepository.findAll().forEach(System.out::println);
+		scanner.close();
+	}
 
 	@Transactional
 	public void delete() {
@@ -38,12 +50,8 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		System.out.println("Ingrese el id de la persona a eliminar: ");
 		Long id = scanner.nextLong();
 		Optional<Person> optionalPerson = personRepository.findById(id);
-		if (optionalPerson.isPresent()) {
-			personRepository.deleteById(id);
-			System.out.println("Persona eliminada con id: " + id);
-		} else {
-			System.out.println("Persona no encontrada con id: " + id);
-		}
+		optionalPerson.ifPresentOrElse(person -> personRepository.delete(person),
+		 () -> System.out.println("Persona no encontrada con id: " + id));
 		personRepository.findAll().forEach(System.out::println);
 		scanner.close();
 	}
