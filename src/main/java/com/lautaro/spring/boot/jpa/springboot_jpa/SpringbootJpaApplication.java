@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.lautaro.spring.boot.jpa.springboot_jpa.entities.Person;
 import com.lautaro.spring.boot.jpa.springboot_jpa.repositories.PersonRepository;
@@ -23,15 +24,27 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		create();
-		
+		//findOne();
+		//List();
 	}
 
+	@Transactional
 	public void create() {
-		Person person = new Person(null, "Lautaro", "Vh", "Java");
+		Scanner scanner = new Scanner(System.in);
+		String name = scanner.next();
+		String lastName = scanner.next();
+		String programmingLanguage = scanner.next();
+		scanner.close();
+
+		Person person = new Person(null, name, lastName, programmingLanguage);
 		Person savedPerson = personRepository.save(person);
 		System.out.println(savedPerson);
 
+		personRepository.findById(savedPerson.getId()).ifPresent(System.out::println);
+
 	}
+	
+	@Transactional(readOnly = true)
 	public void findOne(){
 		//Person person = null;
 		//Optional<Person> optionalPerson = personRepository.findById(1L);
@@ -42,6 +55,8 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		personRepository.findByNameContaining("ria").ifPresent(System.out::println);
 
 	}
+
+	@Transactional(readOnly = true)
 	public void List(){
 
 		//List<Person> persons = (List<Person>) personRepository.findAll();
