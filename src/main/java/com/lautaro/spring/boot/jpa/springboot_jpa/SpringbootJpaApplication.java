@@ -35,14 +35,18 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		System.out.println("Ingrese el id de la persona a actualizar: ");
 		Long id = scanner.nextLong();
 		Optional<Person> optionalPerson = personRepository.findById(id);
-		optionalPerson.ifPresent(person -> {
+		//optionalPerson.ifPresent(person -> {
+		if (optionalPerson.isPresent()) {
+			Person person = optionalPerson.get();	
 			System.out.println("Persona encontrada: " + person);
 			System.out.println("Ingrese el nuevo lenguaje de programacion: ");
 			String programmingLanguage = scanner.next();
 			person.setProgrammingLanguage(programmingLanguage);
 			personRepository.save(person);
 			System.out.println("Persona actualizada: " + person);
-		});
+		} else {
+			System.out.println("Persona no encontrada con id: " + id);
+		}
 		scanner.close();
 	}
 
