@@ -10,6 +10,15 @@ import com.lautaro.spring.boot.jpa.springboot_jpa.entities.Person;
 
 public interface PersonRepository extends CrudRepository<Person, Long> {
 
+    @Query("SELECT p.name FROM Person p WHERE p.id = ?1")
+    String getNameById(Long id);
+
+    @Query("SELECT p.id FROM Person p WHERE p.id = ?1")
+    Long getIdById(Long id);
+
+    @Query("SELECT concat(p.name, ' ', p.lastName) as fullName FROM Person p WHERE p.id = ?1")
+    String getFullNameById(Long id);
+
     @Query("SELECT p FROM Person p WHERE p.id = ?1")
     Optional<Person> findOne(Long id);
 

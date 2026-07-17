@@ -23,13 +23,36 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		System.out.println("================================================================================================");
+		personalizedQueries();
 		//delete();
-		delete2();
+		//delete2();
 		//update();
 		//create();
 		//findOne();
 		//List();
+		System.out.println("================================================================================================");
 	}
+
+	@Transactional(readOnly = true)
+	public void personalizedQueries() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Ingrese el id de la persona a buscar: ");
+		Long id = scanner.nextLong();
+		scanner.close();
+		
+		String name = personRepository.getNameById(id);
+		System.out.println("Nombre de la persona con id " + id + ": " + name);
+
+		Long userId = personRepository.getIdById(id);
+		System.out.println("ID de la persona con id " + id + ": " + userId);
+
+		String fullName = personRepository.getFullNameById(id);
+		System.out.println("Nombre completo de la persona con id " + id + ": " + fullName);
+	}
+
+
+
 @Transactional
 	public void delete2() {
 		personRepository.findAll().forEach(System.out::println);
@@ -78,20 +101,26 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 	}
 
 	@Transactional
-	public void create() {
-		Scanner scanner = new Scanner(System.in);
-		String name = scanner.next();
-		String lastName = scanner.next();
-		String programmingLanguage = scanner.next();
-		scanner.close();
+public void create() {
+    Scanner scanner = new Scanner(System.in);
 
-		Person person = new Person(null, name, lastName, programmingLanguage);
-		Person savedPerson = personRepository.save(person);
-		System.out.println(savedPerson);
+    System.out.println("Ingrese el nombre:");
+    String name = scanner.nextLine();
 
-		personRepository.findById(savedPerson.getId()).ifPresent(System.out::println);
+    System.out.println("Ingrese el apellido:");
+    String lastName = scanner.nextLine();
 
-	}
+    System.out.println("Ingrese el lenguaje de programación:");
+    String programmingLanguage = scanner.nextLine();
+
+    Person person = new Person(null, name, lastName, programmingLanguage);
+    Person savedPerson = personRepository.save(person);
+
+    System.out.println(savedPerson);
+
+    String fullName = personRepository.getFullNameById(savedPerson.getId());
+    System.out.println("Nombre completo: " + fullName);
+}
 	
 	@Transactional(readOnly = true)
 	public void findOne(){

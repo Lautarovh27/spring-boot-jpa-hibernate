@@ -15,17 +15,17 @@ import jakarta.persistence.Table;
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
         private String name;
-        private String lastname;
+        private String lastName;
 
         @Column(name = "programming_language")
         private String programmingLanguage;
 
         public Person() {
         }
-        public Person(Long id, String name, String lastname, String programmingLanguage) {
+        public Person(Long id, String name, String lastName, String programmingLanguage) {
             this.id = id;
             this.name = name;
-            this.lastname = lastname    ;
+            this.lastName = lastName;
             this.programmingLanguage = programmingLanguage;
         }
         public Long getId() {
@@ -40,11 +40,11 @@ import jakarta.persistence.Table;
         public void setName(String name) {
             this.name = name;
         }
-        public String getLastname() {
-            return lastname;
+        public String getLastName() {
+            return lastName;
         }
-        public void setLastname(String lastname) {
-            this.lastname = lastname;
+        public void setLastName(String lastName) {
+            this.lastName = lastName  ;
         }
         public String getProgrammingLanguage() {
             return programmingLanguage;
@@ -58,7 +58,7 @@ import jakarta.persistence.Table;
             return "[" +
                     "id=" + id +
                     ", name='" + name + '\'' +
-                    ", lastname='" + lastname + '\'' +
+                    ", lastName='" + lastName + '\'' +
                     ", programmingLanguage='" + programmingLanguage + '\'' +
                     ']';
         }
