@@ -9,7 +9,7 @@ public class PersonDto {
         this.name = name;
         this.lastName = lastName;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -23,7 +23,10 @@ public class PersonDto {
         this.lastName = lastName;
     }
 
-
+    @Override
+    public String toString() {
+        return "PersonDto [name=" + name + ", lastName=" + lastName + "]";
+    }
     
     
 }

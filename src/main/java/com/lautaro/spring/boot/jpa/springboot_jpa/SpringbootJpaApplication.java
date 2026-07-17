@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lautaro.spring.boot.jpa.springboot_jpa.entities.Person;
+import com.lautaro.spring.boot.jpa.springboot_jpa.dto.PersonDto;
 import com.lautaro.spring.boot.jpa.springboot_jpa.repositories.PersonRepository;
 
 @SpringBootApplication
@@ -80,6 +81,11 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 			System.out.println(person);	
 		}
 		
+		List<PersonDto> personsDto = personRepository.findAllClassPersonDto();
+		System.out.println("Datos de todas las personas (usando DTO):");
+		for (PersonDto person : personsDto) {
+			System.out.println(person);
+		}
 	}
 
 @Transactional
