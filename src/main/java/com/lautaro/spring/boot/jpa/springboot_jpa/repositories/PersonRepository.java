@@ -10,6 +10,7 @@ import com.lautaro.spring.boot.jpa.springboot_jpa.entities.Person;
 
 public interface PersonRepository extends CrudRepository<Person, Long> {
 
+    @Query("SELECT new Person(p.name, p.lastName) FROM Person p")
     List<Person> findAllClassPerson();
 
     @Query("SELECT p.name FROM Person p WHERE p.id = ?1")
