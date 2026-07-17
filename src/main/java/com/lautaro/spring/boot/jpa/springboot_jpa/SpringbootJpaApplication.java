@@ -49,6 +49,20 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 
 		String fullName = personRepository.getFullNameById(id);
 		System.out.println("Nombre completo de la persona con id " + id + ": " + fullName);
+
+		Optional<Object> optionalReg = personRepository.obtenerPersonFullDataById(id);
+		 if(optionalReg.isPresent()) {
+			 Object[] reg = (Object[]) optionalReg.get();
+			 System.out.println("Datos de la persona con nombre: " + reg[0] + ", Apellido: " + reg[1] + ", Lenguaje de programación: " + reg[2]);
+			 ;
+
+		List<Object[]> personsData = personRepository.obtenerPersonsFullData();
+		System.out.println("Datos de todas las personas:");
+		for (Object[] data : personsData) {
+			System.out.println("Nombre: " + data[0] + ", Apellido: " + data[1] + ", Lenguaje de programación: " + data[2]);
+		}
+	}
+
 	}
 
 
@@ -120,6 +134,7 @@ public void create() {
 
     String fullName = personRepository.getFullNameById(savedPerson.getId());
     System.out.println("Nombre completo: " + fullName);
+	scanner.close();
 }
 	
 	@Transactional(readOnly = true)
