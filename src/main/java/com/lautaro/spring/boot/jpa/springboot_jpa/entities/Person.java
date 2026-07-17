@@ -20,6 +20,10 @@ import jakarta.persistence.Table;
         @Column(name = "programming_language")
         private String programmingLanguage;
 
+        public Person(String name, String lastName) {
+            this.name = name;
+            this.lastName = lastName;
+        }
         public Person() {
         }
         public Person(Long id, String name, String lastName, String programmingLanguage) {

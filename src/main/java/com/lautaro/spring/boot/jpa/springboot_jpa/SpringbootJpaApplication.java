@@ -24,7 +24,8 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		System.out.println("================================================================================================");
-		personalizedQueries();
+		//personalizedQueries();
+		personalizedQueries2();
 		//delete();
 		//delete2();
 		//update();
@@ -65,7 +66,14 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 
 	}
 
-
+@Transactional(readOnly = true)
+	public void personalizedQueries2(){
+		List<Object[]> personsData = personRepository.findAllMixPersonDataList();
+		System.out.println("Datos de todas las personas:");
+		for (Object[] data : personsData) {
+			System.out.println("Lenguaje de programación: " + data[1] + ", Persona: " + data[0]);
+		}
+	}
 
 @Transactional
 	public void delete2() {
