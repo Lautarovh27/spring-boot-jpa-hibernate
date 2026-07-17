@@ -73,6 +73,13 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		for (Object[] data : personsData) {
 			System.out.println("Lenguaje de programación: " + data[1] + ", Persona: " + data[0]);
 		}
+
+		List<Person> persons = personRepository.findAllClassPerson();
+		System.out.println("Datos de todas las personas (usando constructor):");
+		for (Person person : persons) {
+			System.out.println(person);	
+		}
+		
 	}
 
 @Transactional
