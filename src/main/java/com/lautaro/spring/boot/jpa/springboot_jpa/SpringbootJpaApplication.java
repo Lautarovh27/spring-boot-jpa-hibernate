@@ -27,13 +27,33 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		System.out.println("================================================================================================");
 		//personalizedQueries();
 		//personalizedQueries2();
-		personalizedQueriesDistinct();
+		//personalizedQueriesDistinct();
+		personalizedQueriesConcatUpperAndLowerCase();
 		//delete();
 		//delete2();
 		//update();
 		//create();
 		//findOne();
 		//List();
+		System.out.println("================================================================================================");
+	}
+
+@Transactional(readOnly = true)
+	public void personalizedQueriesConcatUpperAndLowerCase() {
+		
+		List<String> fullNames = personRepository.findAllFullNameConcat();
+		System.out.println("Nombres completos de todas las personas:");
+		fullNames.forEach(System.out::println);
+		System.out.println("================================================================================================");
+
+		List<String> fullNamesUpper = personRepository.findAllFullNameConcatUpper();
+		System.out.println("Nombres completos en mayúsculas de todas las personas:");
+		fullNamesUpper.forEach(System.out::println);
+		System.out.println("================================================================================================");
+
+		List<String> fullNamesLower = personRepository.findAllFullNameConcatLower();
+		System.out.println("Nombres completos en minúsculas de todas las personas:");
+		fullNamesLower.forEach(System.out::println);
 		System.out.println("================================================================================================");
 	}
 
@@ -48,10 +68,12 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		System.out.println("Nombres distintos de todas las personas:");
 		distinctNames.forEach(System.out::println);
 		System.out.println("================================================================================================");
+
 		List<String> programmingLanguages = personRepository.findAllProgrammingLanguages();
 		System.out.println("Lenguajes de programación de todas las personas:");
 		programmingLanguages.forEach(System.out::println);
 		System.out.println("================================================================================================");
+
 		List<String> distinctProgrammingLanguages = personRepository.findAllProgrammingLanguagesDistinct();
 		System.out.println("Lenguajes de programación distintos de todas las personas:");
 		distinctProgrammingLanguages.forEach(System.out::println);

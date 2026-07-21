@@ -11,6 +11,17 @@ import com.lautaro.spring.boot.jpa.springboot_jpa.entities.Person;
 
 
 public interface PersonRepository extends CrudRepository<Person, Long> {
+
+    @Query("SELECT concat(upper(p.name), ' ', upper(p.lastName))FROM Person p")
+    List<String> findAllFullNameConcatUpper();
+
+    
+    @Query("SELECT concat(lower(p.name), ' ', lower(p.lastName))FROM Person p")
+    List<String> findAllFullNameConcatLower();
+
+    //@Query("SELECT p.name || ' ' || p.lastName)FROM Person p")
+     @Query("SELECT concat(p.name, ' ', p.lastName)FROM Person p")
+    List<String> findAllFullNameConcat();
     
     @Query("SELECT count(distinct(p.programmingLanguage)) FROM Person p")
     Long findAllProgrammingLanguagesDistinctCount();
