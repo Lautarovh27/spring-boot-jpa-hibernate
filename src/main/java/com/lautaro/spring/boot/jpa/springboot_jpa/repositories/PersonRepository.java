@@ -12,6 +12,16 @@ import com.lautaro.spring.boot.jpa.springboot_jpa.entities.Person;
 
 public interface PersonRepository extends CrudRepository<Person, Long> {
 
+    @Query("SELECT distinct(p.programmingLanguage) FROM Person p")
+    List<String> findAllProgrammingLanguagesDistinct();
+    @Query("SELECT p.programmingLanguage FROM Person p")
+    List<String> findAllProgrammingLanguages();
+    @Query("SELECT p.name FROM Person p")
+    List<String> findAllNames();
+
+    @Query("SELECT distinct(p.name) FROM Person p")
+    List<String> findAllNamesDistinct();
+
     @Query("SELECT new com.lautaro.spring.boot.jpa.springboot_jpa.dto.PersonDto(p.name, p.lastName) FROM Person p")
     List<PersonDto> findAllClassPersonDto();
 

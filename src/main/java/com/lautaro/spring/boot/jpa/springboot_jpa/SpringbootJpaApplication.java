@@ -26,7 +26,8 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		System.out.println("================================================================================================");
 		//personalizedQueries();
-		personalizedQueries2();
+		//personalizedQueries2();
+		personalizedQueriesDistinct();
 		//delete();
 		//delete2();
 		//update();
@@ -34,6 +35,27 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		//findOne();
 		//List();
 		System.out.println("================================================================================================");
+	}
+
+	@Transactional(readOnly = true)
+	public void personalizedQueriesDistinct() {
+		List<String> names = personRepository.findAllNames();
+		System.out.println("Nombres de todas las personas:");
+		names.forEach(System.out::println);	
+		System.out.println("================================================================================================");
+
+		List<String> distinctNames = personRepository.findAllNamesDistinct();
+		System.out.println("Nombres distintos de todas las personas:");
+		distinctNames.forEach(System.out::println);
+		System.out.println("================================================================================================");
+		List<String> programmingLanguages = personRepository.findAllProgrammingLanguages();
+		System.out.println("Lenguajes de programación de todas las personas:");
+		programmingLanguages.forEach(System.out::println);
+		System.out.println("================================================================================================");
+		List<String> distinctProgrammingLanguages = personRepository.findAllProgrammingLanguagesDistinct();
+		System.out.println("Lenguajes de programación distintos de todas las personas:");
+		distinctProgrammingLanguages.forEach(System.out::println);
+
 	}
 
 	@Transactional(readOnly = true)
