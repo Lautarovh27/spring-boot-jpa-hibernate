@@ -38,6 +38,17 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		System.out.println("================================================================================================");
 	}
 
+@Transactional(readOnly = true)	
+	public void personalizedQueriesBetween() {
+		List<Person> persons = personRepository.findByIdBetween(1L, 5L);
+		System.out.println("Personas con ID entre 1 y 5:");
+		persons.forEach(System.out::println);
+
+		persons = personRepository.findByNameBetween("J", "P");
+		System.out.println("Personas con nombre entre J y P:");
+		System.out.println("================================================================================================");
+	}
+
 @Transactional(readOnly = true)
 	public void personalizedQueriesConcatUpperAndLowerCase() {
 		
