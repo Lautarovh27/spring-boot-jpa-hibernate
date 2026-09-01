@@ -28,7 +28,8 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		//personalizedQueries();
 		//personalizedQueries2();
 		//personalizedQueriesDistinct();
-		personalizedQueriesConcatUpperAndLowerCase();
+		//personalizedQueriesConcatUpperAndLowerCase();
+		personalizedQueriesBetween();
 		//delete();
 		//delete2();
 		//update();
@@ -40,11 +41,19 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 
 @Transactional(readOnly = true)	
 	public void personalizedQueriesBetween() {
-		List<Person> persons = personRepository.findByBetweenId(1L, 5L);
+		List<Person> persons = personRepository.findByIdBetween(1L, 5L);
+		persons = personRepository.findByNameBetween("J", "P");
+		persons.forEach(System.out::println);
+
+		persons = personRepository.findByIdBetweenOrderByIdDesc(1L, 5L);
+		System.out.println("Personas con ID entre 1 y 5 ordenadas descendentemente:");
+		persons.forEach(System.out::println);
+
+		persons = personRepository.findAllByIdBetween(1L, 5L);
 		System.out.println("Personas con ID entre 1 y 5:");
 		persons.forEach(System.out::println);
 
-		persons = personRepository.findByBetweenName("J", "P");
+		persons = personRepository.findAllByNameBetween("J", "P");
 		System.out.println("Personas con nombre entre J y P:");
 		System.out.println("================================================================================================");
 	}
