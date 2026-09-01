@@ -56,6 +56,11 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		persons = personRepository.findAllByNameBetween("J", "P");
 		System.out.println("Personas con nombre entre J y P:");
 		System.out.println("================================================================================================");
+
+		persons = personRepository.findAllByOrderByNameDesc();
+		System.out.println("Todas las personas ordenadas por nombre descendentemente:");	
+		persons.forEach(System.out::println);
+		System.out.println("================================================================================================");
 	}
 
 @Transactional(readOnly = true)

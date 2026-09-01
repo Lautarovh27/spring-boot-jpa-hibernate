@@ -12,6 +12,10 @@ import com.lautaro.spring.boot.jpa.springboot_jpa.entities.Person;
 
 public interface PersonRepository extends CrudRepository<Person, Long> {
 
+    List<Person> findAllByOrderByNameDesc();
+
+    @Query("SELECT p FROM Person p order by p.name asc")
+    List<Person> getAll();
     List<Person> findByIdBetweenOrderByIdDesc(Long id1, Long id2);
     List<Person> findByIdBetween(Long id1, Long id2);
     List<Person> findByNameBetween(String name1, String name2);
