@@ -29,7 +29,8 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		//personalizedQueries2();
 		//personalizedQueriesDistinct();
 		//personalizedQueriesConcatUpperAndLowerCase();
-		personalizedQueriesBetween();
+		//personalizedQueriesBetween();
+		personalizedFunctionAggregate();
 		//delete();
 		//delete2();
 		//update();
@@ -37,6 +38,18 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		//findOne();
 		//List();
 		System.out.println("================================================================================================");
+	}
+
+
+	public void personalizedFunctionAggregate() {
+		Long totalPersons = personRepository.totalPersons();
+		System.out.println("Total de personas: " + totalPersons);
+
+		Long minId = personRepository.minId();
+		System.out.println("ID mínimo: " + minId);
+
+		Long maxId = personRepository.maxId();
+		System.out.println("ID máximo: " + maxId);
 	}
 
 @Transactional(readOnly = true)	
