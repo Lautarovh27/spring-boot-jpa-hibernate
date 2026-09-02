@@ -12,14 +12,22 @@ import com.lautaro.spring.boot.jpa.springboot_jpa.entities.Person;
 
 public interface PersonRepository extends CrudRepository<Person, Long> {
 
+    @Query("SELECT min(length(p.name)) FROM Person p")
+    public Integer getMinLengthName();
+
+    @Query("SELECT max(length(p.name)) FROM Person p")
+    public Integer getMaxLengthName();
+    @Query("SELECT p.name, length(p.name) FROM Person p")
+    public List<Object[]> getPersonNameLength();
+
     @Query("SELECT count(p) FROM Person p")
-    Long totalPersons();
+    Long getTotalPersons();
 
     @Query("SELECT min(p.id) FROM Person p")
-    Long minId();
+    Long getMinId();
 
     @Query("SELECT max(p.id) FROM Person p")
-    Long maxId();
+    Long getMaxId();
 
     List<Person> findAllByOrderByNameDesc();
 

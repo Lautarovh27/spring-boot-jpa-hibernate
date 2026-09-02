@@ -42,14 +42,27 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 
 
 	public void personalizedFunctionAggregate() {
-		Long totalPersons = personRepository.totalPersons();
+		Long totalPersons = personRepository.getTotalPersons();
 		System.out.println("Total de personas: " + totalPersons);
 
-		Long minId = personRepository.minId();
+		Long minId = personRepository.getMinId();
 		System.out.println("ID mínimo: " + minId);
 
-		Long maxId = personRepository.maxId();
+		Long maxId = personRepository.getMaxId();
 		System.out.println("ID máximo: " + maxId);
+
+		List<Object[]> regs = personRepository.getPersonNameLength();
+		System.out.println("Longitud de los nombres de las personas:");
+		regs.forEach(reg -> {
+			String name = (String) reg[0];
+			Integer length = (Integer) reg[1];
+			System.out.println("Nombre: " + name + ", Longitud: " + length);
+		});
+
+		Integer minLengthName = personRepository.getMinLengthName();
+		System.out.println("Longitud mínima de los nombres: " + minLengthName);
+		Integer maxLengthName = personRepository.getMaxLengthName();
+		System.out.println("Longitud máxima de los nombres: " + maxLengthName);
 	}
 
 @Transactional(readOnly = true)	
